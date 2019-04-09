@@ -327,7 +327,7 @@ quot2:	cmp.b #'"',(a0)		; copy name and find end
 	bra.s quot2		;
 
 
-;­­­­­­ Textroutine
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Textroutine
 noshow:	rts				
 top:	lea    $dff000,a5		;
 move.b $bfe801,d0
@@ -341,38 +341,37 @@ beq.s top_w1
 	tst.l d0			;
 	beq.s noshow			;
 	move.l d0,a1			;
-	lea clist(pc),a2		;
+	lea data(pc),a2			;
 	lea space(pc),a3		;
 	move.l a3,d0			;
-	move.w d0,cl_ppL-clist(a2)	;
+	move.w d0,cl_ppL-data(a2)	;
 	swap d0				;
-	move.w d0,cl_ppH-clist(a2)	;
-	clr.w  cl_col-clist(a2)		; start black
+	move.w d0,cl_ppH-data(a2)	;
+	clr.w  cl_col-data(a2)		; start black
 	move.l 50(a1),-(a7)		; save old LOFlist
 	move.l a1,-(a7)			;  and GFX base
 	move.l a2,50(a1)		; install clist
-	addq.w #1,-(a2)			;add one shown text
-	lea code(pc),a4			;
+	addq.w #1,numstx-data(a2)	; add one shown text
 nospr:	btst #0,5(a5)			;
 	bne.s nospr			;
 	cmp.b #$1a,6(a5)		;
 	bne.s nospr			;
 	move.w #$0020,$96(a5)		;sprite dma off
 					
-	lea    text(pc),a2		;
+	lea    text(pc),a4		;
 again:	lea    space(pc),a3		;position of letter
 	move.l a3,a0			;clear screen
 	move.w #7*40-1,d0		;
 kill:	clr.b  (a0)+			;
 	dbf    d0,kill			;
 	moveq  #0,d0			;
-	move.b (a2)+,d0			;
+	move.b (a4)+,d0			;
 	cmp.b  #$ff,d0			;end of text?
 	beq.s  end2			;
 	add.w  d0,a3			;
 loop:	move.l a3,a1			
 	moveq  #0,d0			
-	move.b (a2)+,d0			
+	move.b (a4)+,d0			
 	cmp.b  #$fe,d0			
 	beq.s  ready			
 	mulu   #7,d0			
@@ -386,11 +385,11 @@ copy2:	move.b (a0)+,(a1)
 	bra.s  loop			
 					
 ready:	moveq  #$0,d0			
-	move.b #$6,(a4)			
+	move.w #$0111,d2
 	move.w #$0900,d5		;cycle delay
 	bsr.s  cycle			
 	move.w #$0fff,d0		
-	move.b #$4,(a4)			
+	move.w #$0eef,d2
 	move.w #$0200,d5		
 	bsr.s  cycle			
 	bra.s  again			
@@ -401,10 +400,9 @@ end2:	move.w #$c020,$96(a5)		; sprites on
 	rts				
 					
 cycle:	moveq  #$0f,d1			; *** Dawnroutine
-dawn:	move.w d0,cl_col-code(a4)	; set color
-code:	dc.b $06			; 04 =sub.w, 06 =add.w
-	dc.b $40			
-	dc.w $0111			
+dawn:	move.w d0,cl_col-data(a2)	; set color
+		add.w  d2,d0
+		and.w  #$0fff,d0
 	moveq  #$14,d3			
 	bsr.s  wait			
 	dbf    d1,dawn			
@@ -414,6 +412,7 @@ wait:	cmp.b  #$ff,$06(a5)
 	dbf    d3,wait			
 	rts				
 					
+data:
 numcop:	dc.w 1433			;number of copies
 numstx:	dc.w 1125			;number of shown texts
 clist:	dc.w $0102,$0000
