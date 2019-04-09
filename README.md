@@ -3,7 +3,7 @@
 ## Facts
 - TTV1 was the first file-based Amiga virus
 - Its creation was a fun experiment. It was inspired by the boot block based [SCA virus](https://www.sca.ch/amiga/virus/sca-virus.html) which had reached dubious fame due to its very successful spreading and the flaw of overwriting the boot block. Would it be possible to create a self spreading file, thus breaking out of the boot block dread?
-- Development took place between spring and fall 1989.
+- Development took place between spring and fall 1988.
 - The early code name was *HOUZ* virus.
 - Thinking up the name we tried to find something that would sound mean and at the same time on the verge to ridiculous. The final name was inspired by a rap band called The Terrorists.
 - The virus does not harm the system. In fact, care was taken to avoid any even unintentional damage.
