@@ -10,7 +10,7 @@
 - Identity of the authors was kept secret for 30 years. It was officially revealed on March 9, 2019 at the [Demonights 008 event in Bern Switzerland](https://slack-files.com/T0K11HLNQ-FFFCSC7N3-6f346eb498
 )
 - "The names have been changed to protect the innocent" shown in the message was inspired by the song [Beat Dis by Bomb the Bass](https://en.wikipedia.org/wiki/Beat_Dis). They have sampled it from the [Dragnet radio series](https://en.wikipedia.org/wiki/Dragnet_(radio_series)).
-- The "BGS1" was in fact a clone. Its code is almost identical even including the resident name "TTV1". It got more reach and thus was regarded as the origin.
+- The ["BGS9"](http://agn-www.informatik.uni-hamburg.de/catalog/amiga/html/bgs91.htm) was in fact a clone. Its code is almost identical even including the resident name "TTV1". It got more reach and thus was regarded as the origin.
 
 ## About the life of the beast
 1. TTV1 installs itself as a reset proof resident module (KickTag/ROMTag) named "TTV1"
